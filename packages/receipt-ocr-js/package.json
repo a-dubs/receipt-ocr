@@ -1,0 +1,56 @@
+{
+  "name": "receipt-ocr-js",
+  "version": "1.0.0",
+  "description": "Browser-native receipt OCR — extract structured data from receipt images using LLMs, runs fully in-browser with no server required.",
+  "keywords": ["ocr", "receipt", "llm", "openai", "browser"],
+  "license": "MIT",
+  "author": "Bhimraj Yadav <bhimrajyadav977@gmail.com>",
+  "homepage": "https://github.com/bhimrazy/receipt-ocr",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bhimrazy/receipt-ocr.git",
+    "directory": "packages/receipt-ocr-js"
+  },
+  "bugs": {
+    "url": "https://github.com/bhimrazy/receipt-ocr/issues"
+  },
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "npm run build:esm && npm run build:cjs && npm run build:types && npm run postbuild:cjs",
+    "postbuild:cjs": "echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:types": "tsc -p tsconfig.types.json",
+    "clean": "rm -rf dist",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "openai": "^4.97.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.15.3",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.2",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
